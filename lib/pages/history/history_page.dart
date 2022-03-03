@@ -8,6 +8,7 @@ import 'package:dory/pages/today/today_take_tile.dart';
 import 'package:dory/components/dory_constants.dart';
 import 'package:dory/main.dart';
 import 'package:dory/models/medicine_history.dart';
+import 'package:dory/pages/history/history_empty_widget.dart';
 
 class HistoryPage extends StatelessWidget {
   const HistoryPage({Key? key}) : super(key: key);
@@ -35,6 +36,9 @@ class HistoryPage extends StatelessWidget {
 
   Widget _buildListView(context, Box<MedicineHistory> historyBox, _) {
     final histories = historyBox.values.toList().reversed.toList();
+    if (histories.isEmpty) {
+      return const HistoryEmpty();
+    }
 
     return ListView.builder(
         itemCount: histories.length,

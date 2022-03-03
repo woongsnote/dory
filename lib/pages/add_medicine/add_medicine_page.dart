@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:dory/main.dart';
+import 'package:dory/models/medicine.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,15 +14,39 @@ import 'package:dory/pages/bottomsheet/pick_image_bottomsheet.dart';
 import 'components/add_page_widget.dart';
 
 class AddMedicinePage extends StatefulWidget {
-  const AddMedicinePage({Key? key}) : super(key: key);
+  const AddMedicinePage({
+    Key? key,
+    this.updateMedicineId = -1,
+  }) : super(key: key);
+
+  final int updateMedicineId;
 
   @override
   State<AddMedicinePage> createState() => _AddMedicinePageState();
 }
 
 class _AddMedicinePageState extends State<AddMedicinePage> {
-  final _nameController = TextEditingController();
+  late TextEditingController _nameController;
   File? _medicineImage;
+
+  bool get _isUpdate => widget.updateMedicineId != -1;
+
+  Medicine get _updateMedicine => medicineRepository.medicineBox.values
+      .singleWhere((medicine) => medicine.id == widget.updateMedicineId);
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (_isUpdate) {
+      _nameController = TextEditingController(text: _updateMedicine.name);
+      if (_updateMedicine.imagePath != null) {
+        _medicineImage = File(_updateMedicine.imagePath!);
+      }
+    } else {
+      _nameController = TextEditingController();
+    }
+  }
 
   @override
   void dispose() {
@@ -46,6 +72,7 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
               ),
               Center(
                 child: _MedicineImageButton(
+                  updateImage: _medicineImage,
                   changedImageFile: (File? value) {
                     _medicineImage = value;
                   },
@@ -89,6 +116,7 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
         page: AddAlarmPage(
           medicineImage: _medicineImage,
           medicineName: _nameController.text,
+          updateMedicineId: widget.updateMedicineId,
         ),
       ),
     );
@@ -96,10 +124,14 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
 }
 
 class _MedicineImageButton extends StatefulWidget {
-  const _MedicineImageButton({Key? key, required this.changedImageFile})
-      : super(key: key);
+  const _MedicineImageButton({
+    Key? key,
+    required this.changedImageFile,
+    this.updateImage,
+  }) : super(key: key);
 
   final ValueChanged<File?> changedImageFile;
+  final File? updateImage;
 
   @override
   State<_MedicineImageButton> createState() => _MedicineImageButtonState();
@@ -107,6 +139,12 @@ class _MedicineImageButton extends StatefulWidget {
 
 class _MedicineImageButtonState extends State<_MedicineImageButton> {
   File? _pickedImage;
+
+  @override
+  void initState() {
+    super.initState();
+    _pickedImage = widget.updateImage;
+  }
 
   @override
   Widget build(BuildContext context) {

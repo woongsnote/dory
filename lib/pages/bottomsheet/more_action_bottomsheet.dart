@@ -16,19 +16,26 @@ class MoreActionBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomSheetBody(
       children: [
-        TextButton(
-          onPressed: onPressedModify,
-          child: const Text('약 정보 수정'),
+        Expanded(
+          child: TextButton(
+            style: TextButton.styleFrom(primary: Colors.blue),
+            onPressed: onPressedDeleteOnlyMedicine,
+            child: const Text('약 정보 삭제'),
+          ),
         ),
-        TextButton(
-          style: TextButton.styleFrom(primary: Colors.red),
-          onPressed: onPressedDeleteOnlyMedicine,
-          child: const Text('약 정보 삭제'),
+        Expanded(
+          child: TextButton(
+            style: TextButton.styleFrom(primary: Colors.redAccent),
+            onPressed: onPressedDeleteOnlyMedicine,
+            child: const Text('약 정보 삭제'),
+          ),
         ),
-        TextButton(
-          style: TextButton.styleFrom(primary: Colors.red),
-          onPressed: onPressedDeleteAll,
-          child: const Text('약 기록과 함께 약 정보 삭제'),
+        Expanded(
+          child: TextButton(
+            style: TextButton.styleFrom(primary: Colors.redAccent),
+            onPressed: onPressedDeleteAll,
+            child: const Text('약 기록과 함께 약 정보 삭제'),
+          ),
         ),
       ],
     );

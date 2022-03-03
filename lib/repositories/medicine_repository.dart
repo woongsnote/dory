@@ -11,7 +11,7 @@ class MedicineRepository {
   }
 
   void addMedicine(Medicine medicine) async {
-    int key = await medicineBox.add(medicine);
+    await medicineBox.add(medicine);
     // print(key);
   }
 

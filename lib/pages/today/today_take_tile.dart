@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:dory/pages/add_medicine/add_medicine_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -222,7 +223,14 @@ class _MoreButton extends StatelessWidget {
         showModalBottomSheet(
           context: context,
           builder: (context) => MoreActionBottomSheet(
-            onPressedModify: () {},
+            onPressedModify: () {
+              Navigator.push(
+                context,
+                FadePageRoute(
+                  page: AddMedicinePage(updateMedicineId: medicineAlarm.id),
+                ),
+              ).then((_) => Navigator.pop(context));
+            },
             onPressedDeleteOnlyMedicine: () {
               notification.deleteMultipleAlarm(alarmIds);
 
@@ -290,6 +298,7 @@ class MedicineImageButton extends StatelessWidget {
       child: CircleAvatar(
         radius: 40,
         foregroundImage: imagePath == null ? null : FileImage(File(imagePath!)),
+        child: imagePath == null ? const Icon(CupertinoIcons.alarm) : null,
       ),
     );
   }

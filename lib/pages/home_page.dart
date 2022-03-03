@@ -41,9 +41,9 @@ class _HomePageState extends State<HomePage> {
 
   BottomAppBar _buildBottomAppBar() {
     return BottomAppBar(
-      child: Container(
+      child: SizedBox(
         height: kBottomNavigationBarHeight,
-        color: Colors.white,
+        // color: Colors.white,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [

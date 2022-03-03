@@ -1,13 +1,14 @@
-import 'package:dory/components/dory_title.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:dory/models/medicine_history.dart';
+import 'package:dory/main.dart';
 import 'package:dory/pages/today/today_take_tile.dart';
 import 'package:dory/pages/today/tody_empty_widget.dart';
 import 'package:dory/components/dory_constants.dart';
-import 'package:dory/main.dart';
+import 'package:dory/components/dory_title.dart';
 import 'package:dory/models/medicine.dart';
 import 'package:dory/models/medicine_alarm.dart';
+import 'package:dory/models/medicine_history.dart';
 
 class TodayPage extends StatelessWidget {
   const TodayPage({Key? key}) : super(key: key);
@@ -51,6 +52,11 @@ class TodayPage extends StatelessWidget {
       }
     }
 
+    medicineAlarms.sort(
+      (a, b) => DateFormat('HH:mm')
+          .parse(a.alarmTime)
+          .compareTo(DateFormat('HH:mm').parse(b.alarmTime)),
+    );
     return Column(children: [
       const Divider(
         height: 1,
