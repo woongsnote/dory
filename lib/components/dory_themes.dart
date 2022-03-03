@@ -17,7 +17,7 @@ class DoryThemes {
         primarySwatch: DoryColors.primaryMaterialColor,
         fontFamily: 'GmarketSansTTF',
         textTheme: _textTheme,
-        splashColor: Colors.white,
+        splashColor: Colors.black,
         brightness: Brightness.dark,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       );

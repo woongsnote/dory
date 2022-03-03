@@ -77,10 +77,10 @@ class TodayPage extends StatelessWidget {
           },
         ),
       ),
-      const Divider(
-        height: 1,
-        thickness: 1.0,
-      ),
+      // const Divider(
+      //   height: 1,
+      //   thickness: 1.0,
+      // ),
     ]);
   }
 

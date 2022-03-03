@@ -42,27 +42,29 @@ class _HomePageState extends State<HomePage> {
   BottomAppBar _buildBottomAppBar() {
     return BottomAppBar(
       child: SizedBox(
-        height: kBottomNavigationBarHeight,
+        height: 80,
+        // height: kBottomNavigationBarHeight,
         // color: Colors.white,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            CupertinoButton(
-              onPressed: () => _onCurrentPage(0),
-              child: Icon(
-                CupertinoIcons.check_mark,
-                color: _currentIndex == 0
-                    ? DoryColors.primaryColor
-                    : Colors.grey[350],
-              ),
-            ),
-            CupertinoButton(
+            IconButton(
+                onPressed: () => _onCurrentPage(0),
+                icon: Icon(
+                  CupertinoIcons.check_mark,
+                  color: _currentIndex == 0
+                      ? DoryColors.primaryColor
+                      : Colors.grey[350],
+                  size: 32,
+                )),
+            IconButton(
               onPressed: () => _onCurrentPage(1),
-              child: Icon(
+              icon: Icon(
                 CupertinoIcons.text_badge_checkmark,
                 color: _currentIndex == 1
                     ? DoryColors.primaryColor
                     : Colors.grey[350],
+                size: 32,
               ),
             ),
           ],
